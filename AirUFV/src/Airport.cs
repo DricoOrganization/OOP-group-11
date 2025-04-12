@@ -6,11 +6,11 @@ namespace AirUFV;
 
 public class Airport {
 
-    private List<Runways> runways;
+    private List<Runway> runways;
 
-    private List<Aircrafts> aircrafts;
+    private Aircraft[,] aircrafts;
 
-    public Airport(List<Runways> runways, List<Aircrafts> aircrafts ) {
+    public Airport(List<Runway> runways,  Aircraft[,] aircrafts ) {
         this.runways = runways;
         this.aircrafts = aircrafts;
     }
