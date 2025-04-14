@@ -1,6 +1,6 @@
 using System;
 
-namespace PRACTICALWORKI
+namespace AirUFV
 {
 
     public enum AircraftStatus
