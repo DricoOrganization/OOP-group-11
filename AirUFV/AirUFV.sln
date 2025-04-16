@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirUFV", "AirUFV.csproj", "{90FC1C7F-E8A3-F746-4F07-B57C7A8CB4EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90FC1C7F-E8A3-F746-4F07-B57C7A8CB4EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FC1C7F-E8A3-F746-4F07-B57C7A8CB4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FC1C7F-E8A3-F746-4F07-B57C7A8CB4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FC1C7F-E8A3-F746-4F07-B57C7A8CB4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {358A2305-A192-4C43-A0A9-2054C5A73DDD}
+	EndGlobalSection
+EndGlobal
