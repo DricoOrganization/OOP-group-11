@@ -9,6 +9,7 @@ internal class Program
 {
 
     public static void Main() {
+        //give the inital selections menu
         Console.WriteLine("----------   Air UFV  ------------");
         Console.WriteLine("1. Load flight from file.");
         Console.WriteLine("2. Load a flight manually.");
@@ -16,12 +17,11 @@ internal class Program
         Console.WriteLine("4. Start simulation (Automatic).");
         Console.WriteLine("5. Exit.");
         Console.WriteLine("----------------------------------");
-        //give the inital selections menu
 
+        //transform the string that the user types to int in order to use it better
+        int input = Int32.Parse(Console.ReadLine());
 
-        // int input = int32.Parse(Console.ReadLine());
-        string input = (Console.ReadLine());
-
+        //a switch case statement that selects the function based on the user input
         switch (input) {
             case 1:
             LoadFlightFromFile();
@@ -41,11 +41,25 @@ internal class Program
 
     }
 
-    
+        /*
+        this asks the user to specify the filetype and imports that file from the filesystem
+        then it enters the data into the current simulation
+        */
         public static void LoadFlightFromFile() {
             Console.Clear();
-            Console.WriteLine("Choose your file.");
-            string path = Console.ReadLine();
+            Console.WriteLine("----------   Air UFV  ------------");
+            Console.WriteLine("1. CSV file");
+            Console.WriteLine("2. Json file");
+            Console.WriteLine("3. Exit");
+            Console.WriteLine("----------------------------------");
+            int filetype = Int32.Parse(Console.ReadLine());
+            if (filetype == 3) {
+            throw new Exception("Program Terminated.");
+            }
+            Console.Clear();
+            Console.WriteLine("Type your filename.");
+            string filepath = Console.ReadLine();
+
         }
 
         public static void LoadFlightManual() {
