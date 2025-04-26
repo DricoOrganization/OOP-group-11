@@ -4,7 +4,9 @@ using System.Collections;
 using System.IO;
 using System.Text.Json;
 
-namespace AirUFV;
+namespace AirUFV {
+    
+}
 
 public class Airport {
 

@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using System.Text.Json;
 
-namespace AirUFV;
-
+namespace AirUFV {
+    
 public class Runway {
     private string ID;
     private enum RunwayStatus{
@@ -82,4 +82,5 @@ public class Runway {
         }
         this.status = RunwayStatus.Free;
     }
+}
 }

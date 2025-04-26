@@ -4,12 +4,14 @@ using System.Collections;
 using System.IO;
 using System.Text.Json;
 
-namespace AirUFV;
+namespace AirUFV
+ {
 
 internal class Program
 {
 
     public static void Main() {
+        Runway runway = new Runway( );
         //give the inital selections menu
         Console.WriteLine("----------   Air UFV  ------------");
         Console.WriteLine("1. Load flight from file.");
@@ -44,14 +46,16 @@ internal class Program
 
         /*
         this asks the user to specify the filetype and and filepath
-        than depending on the type it goes to another functions that handels the loading with that filetype
+        than depending on the type it goes to another functions that handels the loading with that filetype and seperator
         */
         public static void LoadFlightFromFile() {
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
+            Console.WriteLine("Ensure your file has the following headers:");
+            Console.WriteLine("id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel");
             Console.WriteLine("1. CSV file (,)");
             Console.WriteLine("1. CSV file (;)");
-            Console.WriteLine("2. Json file");
+            Console.WriteLine("2. Json file (in progress)");
             Console.WriteLine("3. Exit");
             Console.WriteLine("----------------------------------");
             int filetype = Int32.Parse(Console.ReadLine());
@@ -105,6 +109,7 @@ internal class Program
 
                 for(int i = 0; i < values.Length; i++) {
                     Console.WriteLine(names[i] + seperator + " " + values[i]);
+                    
                 }
                 Console.ReadLine();
             }
@@ -117,3 +122,5 @@ internal class Program
         }
 
 }
+
+ }
