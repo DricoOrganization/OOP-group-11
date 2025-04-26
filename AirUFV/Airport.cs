@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Text.Json;
+using AirUFV;
 
 namespace AirUFV {
     
@@ -14,29 +15,33 @@ public class Airport {
 
     private List<Aircraft> aircrafts;
 
-    public Airport(Runway[,] runways, List<Aircraft> aircrafts ) {
-        this.runways = runways;
-        this.aircrafts = aircrafts;
+    public Airport(Runway runway1, Runway runway2, Aircraft aircraft ) {
+        this.runways[0, 0] = runway1;
+        this.runways[0, 1] = runway2;
+
+        this.aircrafts.Add(aircraft);
     }
 
     /*
     This shows the current status of all runways and aircrafts
     */
     public void ShowStatus() {
-        for (int i = 0; i < runways.length; i++) {
-            if (!runways[i].IsFree()) {
+        for (int j = 0; j < runways.Length; j++) {
+        for (int i = 0; i < runways.Length; i++) {
+            if (!runways[j, i].IsFree()) {
             Console.WriteLine("Occupied by:");
-            Console.WriteLine(runways[i].GetID());
-            Console.WriteLine(runways[i].GetTicksAvailability());
+            Console.WriteLine(runways[j, i].GetID());
+            Console.WriteLine(runways[j, i].GetTicksAvailability());
             }
             Console.WriteLine("Free");
+        }
         }
 
     }
 
     public void AdvanceTick() {
-        for (int i = 0; i < aircrafts.length; i++) {
-            aircrafts[i].AdvanceTick();
+        foreach(Aircraft aircraft in aircrafts) {
+            aircraft.AdvanceTick(1);
         }
     }
 
@@ -45,7 +50,7 @@ public class Airport {
             Console.WriteLine("----------   Air UFV  ------------");
             Console.WriteLine("1. CSV file (,)");
             Console.WriteLine("1. CSV file (;)");
-            Console.WriteLine("2. Json file");
+            Console.WriteLine("2. Json file (in progress)");
             Console.WriteLine("3. Exit");
             Console.WriteLine("----------------------------------");
             int filetype = Int32.Parse(Console.ReadLine());
@@ -55,22 +60,51 @@ public class Airport {
 
             Console.Clear();
             Console.WriteLine("Type your filename.");
-            string filepath = Console.ReadLine();
+            string filePath = Console.ReadLine();
             switch (filetype) {
                 case 1:
-                LoadFlightFromCSVfile(filepath, ",");
+                LoadAircraftFromCSVfile(filePath, ",");
                 break;
                 case 2:
-                LoadFlightFromCSVfile(filepath, ";");
+                LoadAircraftFromCSVfile(filePath, ";");
                 break;
                 case 3:
-                LoadFlightFromJSONfile(filepath);
+                // LoadAircraftFromJSONfile(filePath);
                 break;
             }
     }
 
-    public void AddAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
+    public void AddAircraft(string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maximumLoad = -1, int numberOfPassengers = -1, string owner = "AirUFV")
      {
-        aircrafts.AddAircraft(id, status, distance, speed, fuelCapacity, fuelCapacity, currentFuel);
+        if (type == "Cargo") {
+        aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maximumLoad));
+        } else if (type == "Comercial") {
+        aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numberOfPassengers));
+        } else if (type == "Private") {
+        aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
+        }
+    }
+
+    public void LoadAircraftFromCSVfile(string filepath, string seperator) {
+            StreamReader sr = File.OpenText(filepath);
+
+            string header = sr.ReadLine();
+
+            Console.WriteLine(header);
+
+            string[] names = header.Split(seperator);
+
+            string line = "";
+
+            while ((line = sr.ReadLine()) != null) {
+                string[] values = line.Split(seperator);
+
+                for(int i = 0; i < values.Length; i++) {
+                    Console.WriteLine(names[i] + seperator + " " + values[i]);
+                    aircrafts.Add(values[i])
+                }
+                Console.ReadLine();
+            }
+            sr.Close();
     }
 }

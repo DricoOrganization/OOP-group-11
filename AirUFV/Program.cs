@@ -2,16 +2,21 @@ using System;
 using System;
 using System.Collections;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.Json;
+using AirUFV;
 
-namespace AirUFV
- {
+namespace AirUFV;
 
 internal class Program
 {
 
     public static void Main() {
-        Runway runway = new Runway( );
+        Runway runwayA = new Runway("A");
+        Runway runwayB = new Runway("B");
+        Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
+        Airport AirUFV = new Airport(runwayA, runwayB, aircraft);
+
         //give the inital selections menu
         Console.WriteLine("----------   Air UFV  ------------");
         Console.WriteLine("1. Load flight from file.");
@@ -27,7 +32,8 @@ internal class Program
         //a switch case statement that selects the function based on the user input
         switch (input) {
             case 1:
-            LoadFlightFromFile();
+            var flightdata = LoadFlightFromFile();
+            AirUFV.AddAircraft();
             break;
             case 2:
             LoadFlightManual();
@@ -48,7 +54,7 @@ internal class Program
         this asks the user to specify the filetype and and filepath
         than depending on the type it goes to another functions that handels the loading with that filetype and seperator
         */
-        public static void LoadFlightFromFile() {
+        public static (string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel) LoadFlightFromFile() {
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
             Console.WriteLine("Ensure your file has the following headers:");
@@ -68,24 +74,21 @@ internal class Program
             string filepath = Console.ReadLine();
             switch (filetype) {
                 case 1:
-                LoadFlightFromCSVfile(filepath, ",");
-                break;
+                return LoadFlightFromCSVfile(filepath, ",");
                 case 2:
-                LoadFlightFromCSVfile(filepath, ";");
-                break;
+                return LoadFlightFromCSVfile(filepath, ";");
                 case 3:
-                LoadFlightFromJSONfile(filepath);
-                break;
+                return LoadFlightFromJSONfile(filepath);
             }
 
         }
 
         public static void LoadFlightManual() {
-
+                
         }
 
         public static void StartSimulationManual() {
-
+        //this should be the same as
         }
 
         public static void StartSimualtionAutomatic() {
@@ -108,10 +111,9 @@ internal class Program
                 string[] values = line.Split(seperator);
 
                 for(int i = 0; i < values.Length; i++) {
-                    Console.WriteLine(names[i] + seperator + " " + values[i]);
-                    
+                    Console.WriteLine(values[i]);
+                    Console.WriteLine(",");
                 }
-                Console.ReadLine();
             }
             sr.Close();
             
@@ -122,5 +124,3 @@ internal class Program
         }
 
 }
-
- }
