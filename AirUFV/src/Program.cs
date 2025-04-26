@@ -1,5 +1,6 @@
 using System;
 using System;
+using System.Collections;
 using System.IO;
 using System.Text.Json;
 
@@ -42,23 +43,36 @@ internal class Program
     }
 
         /*
-        this asks the user to specify the filetype and imports that file from the filesystem
-        then it enters the data into the current simulation
+        this asks the user to specify the filetype and and filepath
+        than depending on the type it goes to another functions that handels the loading with that filetype
         */
         public static void LoadFlightFromFile() {
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
-            Console.WriteLine("1. CSV file");
+            Console.WriteLine("1. CSV file (,)");
+            Console.WriteLine("1. CSV file (;)");
             Console.WriteLine("2. Json file");
             Console.WriteLine("3. Exit");
             Console.WriteLine("----------------------------------");
             int filetype = Int32.Parse(Console.ReadLine());
             if (filetype == 3) {
-            throw new Exception("Program Terminated.");
+                throw new Exception("Program Terminated.");
             }
+
             Console.Clear();
             Console.WriteLine("Type your filename.");
             string filepath = Console.ReadLine();
+            switch (filetype) {
+                case 1:
+                LoadFlightFromCSVfile(filepath, ",");
+                break;
+                case 2:
+                LoadFlightFromCSVfile(filepath, ";");
+                break;
+                case 3:
+                LoadFlightFromJSONfile(filepath);
+                break;
+            }
 
         }
 
@@ -73,6 +87,33 @@ internal class Program
         public static void StartSimualtionAutomatic() {
             return;
 
+        }
+
+        public static void LoadFlightFromCSVfile(string filepath, string seperator) {
+            StreamReader sr = File.OpenText(filepath);
+
+            string header = sr.ReadLine();
+
+            Console.WriteLine(header);
+
+            string[] names = header.Split(seperator);
+
+            string line = "";
+
+            while ((line = sr.ReadLine()) != null) {
+                string[] values = line.Split(seperator);
+
+                for(int i = 0; i < values.Length; i++) {
+                    Console.WriteLine(names[i] + seperator + " " + values[i]);
+                }
+                Console.ReadLine();
+            }
+            sr.Close();
+            
+        }
+
+        public static void LoadFlightFromJSONfile(string filepath) {
+            //todo
         }
 
 }
