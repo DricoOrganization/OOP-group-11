@@ -5,6 +5,8 @@ namespace AirUFV
 {
      public class CommercialAircraft : Aircraft
     {
+        private string parameters;
+
         public int numberOfPassengers { get; set; }
 
         public CommercialAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numberOfPassengers)

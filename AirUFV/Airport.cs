@@ -58,15 +58,25 @@ public class Airport {
                 throw new Exception("Program Terminated.");
             }
 
+             Console.Clear();
+            Console.WriteLine("----------   Air UFV  ------------");
+            Console.WriteLine("1. Comercial plane");
+            Console.WriteLine("2. Private Plane");
+            Console.WriteLine("3. Cargo plane");
+            Console.WriteLine("4. Exit");
+            Console.WriteLine("----------------------------------");
+            int planeType = Int32.Parse(Console.ReadLine());
+
+
             Console.Clear();
             Console.WriteLine("Type your filename.");
             string filePath = Console.ReadLine();
             switch (filetype) {
                 case 1:
-                LoadAircraftFromCSVfile(filePath, ",");
+                LoadAircraftFromCSVfile(filePath, ",", planeType);
                 break;
                 case 2:
-                LoadAircraftFromCSVfile(filePath, ";");
+                LoadAircraftFromCSVfile(filePath, ";", planeType);
                 break;
                 case 3:
                 // LoadAircraftFromJSONfile(filePath);
@@ -85,7 +95,7 @@ public class Airport {
         }
     }
 
-    public void LoadAircraftFromCSVfile(string filepath, string seperator) {
+    public void LoadAircraftFromCSVfile(string filepath, string seperator, int planeType) {
             StreamReader sr = File.OpenText(filepath);
 
             string header = sr.ReadLine();
@@ -99,11 +109,22 @@ public class Airport {
             while ((line = sr.ReadLine()) != null) {
                 string[] values = line.Split(seperator);
 
+                string parameters = "";
+
                 for(int i = 0; i < values.Length; i++) {
                     Console.WriteLine(names[i] + seperator + " " + values[i]);
-                    aircrafts.Add(values[i])
+                    parameters += values[i];
+                    parameters += seperator;
                 }
-                Console.ReadLine();
+                    if (planeType == 1) {
+                    aircrafts.Add(new CommercialAircraft(parameters));
+                    AddAircraft("cargo", values[i]);
+                    } else if (planeType == 2) {
+                    aircrafts.Add(new PrivateAircraft(parameters));
+                    } else if (planeType == 3) {
+                    aircrafts.Add(new CargoAircraft(parameters));
+
+                    }
             }
             sr.Close();
     }
