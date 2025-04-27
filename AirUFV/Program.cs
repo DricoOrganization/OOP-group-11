@@ -12,10 +12,7 @@ internal class Program
 {
 
      public static void Main() {
-        Runway runwayA = new Runway("A");
-        Runway runwayB = new Runway("B");
-        Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
-        Airport AirUFV = new Airport(3, 3);
+        Airport AirUFV = new Airport(1, 2);
         
 
         //make the loop for better user experience
@@ -103,8 +100,10 @@ internal class Program
                 airport.AdvanceTick();
 
                 Console.WriteLine("Press 1 if you want to stop the simulation");
-                int tmp = Int32.Parse(Console.ReadLine());
-                if(tmp == 1){
+                Console.WriteLine("Press 0 if you want to continue");
+                ConsoleKeyInfo tmp = Console.ReadKey();
+                int progress = int.Parse(tmp.KeyChar.ToString());
+                if(progress == 1){
                     run = false;
                 }
             }

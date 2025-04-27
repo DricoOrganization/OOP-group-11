@@ -25,13 +25,15 @@ public class Airport {
                 runways[i, j] = new Runway($"Runway {i + 1}-{j + 1}");
             }
         }
+
+        aircrafts = new List<Aircraft>();
     }
 
     /*
     This shows the current status of all runways and aircrafts
     */
     public void ShowStatus() {
-        int lastI;
+        Console.Clear();
         for (int i = 0; i < runways.GetLength(0); i++) {
         for (int j = 0; j < runways.GetLength(1); j++) {
             Console.Write($"{runways[i, j].GetID()}: ");
@@ -81,10 +83,10 @@ public class Airport {
             string filePath = Console.ReadLine();
             switch (filetype) {
                 case 1:
-                LoadAircraftFromCSVfile(filePath, ",", planeType);
+                LoadAircraftFromCSVfile(filePath + ".csv", ",", planeType);
                 break;
                 case 2:
-                LoadAircraftFromCSVfile(filePath, ";", planeType);
+                LoadAircraftFromCSVfile(filePath + ".csv", ";", planeType);
                 break;
                 case 3:
                 // LoadAircraftFromJSONfile(filePath);
@@ -148,5 +150,8 @@ public class Airport {
                     }
             }
             sr.Close();
+            Console.WriteLine("Aircraft added, press enter to continue");
+            Console.ReadKey();
     }
+
 }
