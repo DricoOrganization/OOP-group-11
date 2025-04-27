@@ -107,22 +107,32 @@ public class Airport {
             string line = "";
 
             while ((line = sr.ReadLine()) != null) {
+                //put all the values from the file into an array
                 string[] values = line.Split(seperator);
 
-                string parameters = "";
+                //assign each parameter value with the corresponding value from the array
+                //it was the best way i could think of with the constructor but this is not futureproof
+                string id = values[0];
+                Enum.TryParse(values[1], out AircraftStatus status);
+                int distance = Int32.Parse(values[2]);
+                int speed = Int32.Parse(values[3]);
+                double fuelCapacity = double.Parse(values[4]);
+                double fuelConsumption = double.Parse(values[5]);
+                double currentFuel =  double.Parse(values[6]);
+                object extraVariableDepedingOnPlaneType;
 
-                for(int i = 0; i < values.Length; i++) {
-                    Console.WriteLine(names[i] + seperator + " " + values[i]);
-                    parameters += values[i];
-                    parameters += seperator;
-                }
+                //seperate the plane addition by type and make sure that the type of the extra variable(passengers, max load and owner)
+                //is correctly passed
                     if (planeType == 1) {
-                    aircrafts.Add(new CommercialAircraft(values[0], new AircraftStatus(), values[2], values[3], values[4], values[5], values[6], values[7]));
-                    AddAircraft("cargo", values[i]);
+                    extraVariableDepedingOnPlaneType = Int32.Parse(values[7]);
+                    aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (int) extraVariableDepedingOnPlaneType));
+                    // AddAircraft("cargo", values[i]);
                     } else if (planeType == 2) {
-                    aircrafts.Add(new PrivateAircraft(parameters));
+                    extraVariableDepedingOnPlaneType = values[7];
+                    aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (string) extraVariableDepedingOnPlaneType));
                     } else if (planeType == 3) {
-                    aircrafts.Add(new CargoAircraft(parameters));
+                    extraVariableDepedingOnPlaneType = double.Parse(values[7]);
+                    aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType));
 
                     }
             }
