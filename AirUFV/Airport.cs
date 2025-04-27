@@ -117,7 +117,7 @@ public class Airport {
                     parameters += seperator;
                 }
                     if (planeType == 1) {
-                    aircrafts.Add(new CommercialAircraft(parameters));
+                    aircrafts.Add(new CommercialAircraft(values[0], new AircraftStatus(), values[2], values[3], values[4], values[5], values[6], values[7]));
                     AddAircraft("cargo", values[i]);
                     } else if (planeType == 2) {
                     aircrafts.Add(new PrivateAircraft(parameters));
