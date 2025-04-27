@@ -4,7 +4,9 @@ namespace AirUFV
 {
      public class CommercialAircraft : Aircraft
     {
-        public int numberOfPassengers { get; set; }
+        private string parameters;
+
+        private int numberOfPassengers;
 
         public CommercialAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numberOfPassengers)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
@@ -12,6 +14,15 @@ namespace AirUFV
             this.numberOfPassengers = numberOfPassengers;
         }
 
+        public int GetNumberOfPassengers()
+        {
+            return this.numberOfPassengers;
+        }
+
+        public void SetNumberOfPassengers(int numberOfPassengers)
+        {
+            this.numberOfPassengers = numberOfPassengers;
+        }
         public override string ToString()
         {
             return base.ToString() + $" | Type: Commercial | Passengers: {this.numberOfPassengers}";
