@@ -15,7 +15,7 @@ public class Airport {
 
     private List<Aircraft> aircrafts;
 
-        public Airport(int runwayRows, int runwayCols) {
+    public Airport(int runwayRows, int runwayCols) {
         runways = new Runway[runwayRows, runwayCols];
         
         for (int i = 0; i < runwayRows; i++)
@@ -33,14 +33,17 @@ public class Airport {
     This shows the current status of all runways and aircrafts
     */
     public void ShowStatus() {
-        for (int j = 0; j < runways.Length; j++) {
-        for (int i = 0; i < runways.Length; i++) {
-            if (!runways[j, i].IsFree()) {
+        Console.Clear();
+        for (int i = 0; i < runways.GetLength(0); i++) {
+        for (int j = 0; j < runways.GetLength(1); j++) {
+            Console.Write($"{runways[i, j].GetID()}: ");
+            if (!runways[i, j].IsFree()) {
             Console.WriteLine("Occupied by:");
-            Console.WriteLine(runways[j, i].GetID());
-            Console.WriteLine(runways[j, i].GetTicksAvailability());
-            }
+            Console.WriteLine(runways[i, j].GetID());
+            Console.WriteLine(runways[i, j].GetTicksAvailability());
+            } else {
             Console.WriteLine("Free");
+            }
         }
         }
 
@@ -87,10 +90,10 @@ public class Airport {
             string filePath = Console.ReadLine();
             switch (filetype) {
                 case 1:
-                LoadAircraftFromCSVfile(filePath, ",", planeType);
+                LoadAircraftFromCSVfile(filePath + ".csv", ",", planeType);
                 break;
                 case 2:
-                LoadAircraftFromCSVfile(filePath, ";", planeType);
+                LoadAircraftFromCSVfile(filePath + ".csv", ";", planeType);
                 break;
                 case 3:
                 // LoadAircraftFromJSONfile(filePath);
@@ -156,5 +159,8 @@ public class Airport {
                     }
             }
             sr.Close();
+            Console.WriteLine("Aircraft added, press enter to continue");
+            Console.ReadKey();
     }
+
 }
