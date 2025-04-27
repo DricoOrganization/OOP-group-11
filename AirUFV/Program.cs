@@ -10,10 +10,8 @@ namespace AirUFV;
 
 internal class Program
 {
-
      public static void Main() {
         Airport AirUFV = new Airport(1, 2);
-        
 
         //make the loop for better user experience
         int input = 0;
@@ -53,6 +51,9 @@ internal class Program
         }
     }
 
+        /*
+        LoadFlightManuel will return all the information nessacery
+        */
         public static (string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maximumLoad, int numberOfPassengers, string owner) LoadFlightManual() {
             string[] parameters = ["id", "status", "distance", "speed", "fuelCapacity", "fuelConsumption", "currentFuel",  "maximumLoad/owner/maximumpassangers"];
             List<String> results = [];

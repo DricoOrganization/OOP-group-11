@@ -58,8 +58,10 @@ public class Runway {
             this.currentAircraft = aircraft;
             this.status = RunwayStatus.Occupied;
             this.ticksAvailability = 3;
-            aircraft.status = AircraftStatus.Landing;
+            aircraft.SetStatus(AircraftStatus.Landing);
             return true;
+
+            
         }
         return false;
     }
@@ -78,7 +80,7 @@ public class Runway {
     public void ReleaseRunway(){
         if (this.currentAircraft != null)
         {
-            this.currentAircraft.status = AircraftStatus.OnGround;
+            this.currentAircraft.SetStatus(AircraftStatus.OnGround);
             this.currentAircraft = null;
         }
         this.status = RunwayStatus.Free;
