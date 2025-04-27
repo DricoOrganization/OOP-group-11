@@ -15,8 +15,7 @@ public class Airport {
 
     private List<Aircraft> aircrafts;
 
-        public Airport(int runwayRows, int runwayCols)
-    {
+        public Airport(int runwayRows, int runwayCols) {
         runways = new Runway[runwayRows, runwayCols];
         
         for (int i = 0; i < runwayRows; i++)
@@ -47,12 +46,19 @@ public class Airport {
 
     }
 
+    /*
+    AdvanceTick for all the aircrafts
+    */
     public void AdvanceTick() {
         foreach(Aircraft aircraft in aircrafts) {
             aircraft.AdvanceTick(1);
         }
     }
 
+    /*
+    The user chooses the file type and serperator type for the fiel load
+    along with the type of plane sice it is 1 aircraft
+    */
     public void LoadAircraftFromFile() {
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
@@ -92,6 +98,9 @@ public class Airport {
             }
     }
 
+    /*
+    Add an aircraft to the list
+    */
     public void AddAircraft(string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maximumLoad = -1, int numberOfPassengers = -1, string owner = "AirUFV")
      {
         if (type == "Cargo") {
@@ -103,14 +112,13 @@ public class Airport {
         }
     }
 
+    /*
+    Load the file and extract teh data into an array and use the AddAircraft function to add it into the system
+    */
     public void LoadAircraftFromCSVfile(string filepath, string seperator, int planeType) {
             StreamReader sr = File.OpenText(filepath);
 
             string header = sr.ReadLine();
-
-            Console.WriteLine(header);
-
-            string[] names = header.Split(seperator);
 
             string line = "";
 

@@ -12,11 +12,13 @@ internal class Program
 {
 
     public static void Main() {
+        //initialize the runways and 1 ground aircrafts along withthe airport
         Runway runwayA = new Runway("A");
         Runway runwayB = new Runway("B");
         Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
         Airport AirUFV = new Airport(2, 1);
 
+        //make the loop for better user experience
         int input = 0;
         while(input != 5) {
 
@@ -43,7 +45,7 @@ internal class Program
             AirUFV.AddAircraft(type, id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maximumLoad, numberOfPassengers, owner);
             break;
             case 3:
-            StartSimulationManual();
+            StartSimulationManual(AirUFV);
             break;
             case 4:
             StartSimualtionAutomatic();
@@ -54,6 +56,9 @@ internal class Program
         }
     }
 
+        /*
+        LoadFlightManuel will return all the information nessacery
+        */
         public static (string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maximumLoad, int numberOfPassengers, string owner) LoadFlightManual() {
             string[] parameters = ["id", "status", "distance", "speed", "fuelCapacity", "fuelConsumption", "currentFuel",  "maximumLoad/owner/maximumpassangers"];
             List<String> results = [];
@@ -88,8 +93,24 @@ internal class Program
             return (type, id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maximumLoad, maximumpassangers, owner );
         }
 
-        public static void StartSimulationManual() {
-        //this should be the same as
+        public static void StartSimulationManual(Airport airport) {
+            Console.Clear();
+            Console.WriteLine("Starting manual simulation. Please wait a moment...");
+
+            bool run = true;
+            while(run){
+                airport.ShowStatus();
+                Console.WriteLine("Press any key to advance: ");
+                Console.ReadKey();
+
+                airport.AdvanceTick();
+
+                Console.WriteLine("Press 1 if you want to stop the simulation");
+                int tmp = Int32.Parse(Console.ReadLine());
+                if(tmp == 1){
+                    run = false;
+                }
+            }
         }
 
         public static void StartSimualtionAutomatic() {
