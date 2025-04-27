@@ -45,7 +45,7 @@ public class Airport {
         }
     }
 
-    public void LoadAircraftFromFile(string filepath) {
+    public void LoadAircraftFromFile() {
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
             Console.WriteLine("1. CSV file (,)");
@@ -60,7 +60,7 @@ public class Airport {
 
              Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
-            Console.WriteLine("1. Comercial plane");
+            Console.WriteLine("1. Commercial plane");
             Console.WriteLine("2. Private Plane");
             Console.WriteLine("3. Cargo plane");
             Console.WriteLine("4. Exit");
@@ -121,18 +121,21 @@ public class Airport {
                 double currentFuel =  double.Parse(values[6]);
                 object extraVariableDepedingOnPlaneType;
 
-                //seperate the plane addition by type and make sure that the type of the extra variable(passengers, max load and owner)
-                //is correctly passed
+                //seperate the plane addition by type and make sure that the type of the extra variable(passengers, max load and owner) is correctly passed
+                // we have two ways of adding the aircraft to the aircraft list
+                //i think the AddAircraft method is better, but for a backup we have the aircrafts.Add
                     if (planeType == 1) {
                     extraVariableDepedingOnPlaneType = Int32.Parse(values[7]);
-                    aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (int) extraVariableDepedingOnPlaneType));
-                    // AddAircraft("cargo", values[i]);
+                    // aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (int) extraVariableDepedingOnPlaneType));
+                    AddAircraft("Commercial", id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType);
                     } else if (planeType == 2) {
                     extraVariableDepedingOnPlaneType = values[7];
-                    aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (string) extraVariableDepedingOnPlaneType));
+                    // aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (string) extraVariableDepedingOnPlaneType));
+                    AddAircraft("Private", id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType);
                     } else if (planeType == 3) {
                     extraVariableDepedingOnPlaneType = double.Parse(values[7]);
-                    aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType));
+                    // aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType));
+                    AddAircraft("Cargo", id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, (double)extraVariableDepedingOnPlaneType);
 
                     }
             }
