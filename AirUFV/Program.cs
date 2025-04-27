@@ -48,7 +48,7 @@ internal class Program
             StartSimulationManual(AirUFV);
             break;
             case 4:
-            StartSimualtionAutomatic();
+            StartSimulationAutomatic(AirUFV);
             break;
             case 5:
             throw new Exception("Program Terminated.");
@@ -113,9 +113,36 @@ internal class Program
             }
         }
 
-        public static void StartSimualtionAutomatic() {
-            return;
+        public static void StartSimulationAutomatic(Airport airport)
+        {
+            Console.Clear();
+            Console.WriteLine("Starting automatic simulation...");
 
+            // Ask the user for the wait time (in seconds) between each tick
+            Console.WriteLine("Enter the number of seconds to wait between each simulation tick: ");
+            int waitTimeInSeconds = Int32.Parse(Console.ReadLine());
+
+            bool running = true;
+            while (running)
+            {
+                airport.ShowStatus(); 
+                
+                airport.AdvanceTick();
+
+                Console.WriteLine($"Simulation running... Waiting for {waitTimeInSeconds} seconds before next tick.");
+                
+                System.Threading.Thread.Sleep(waitTimeInSeconds * 1000); 
+
+
+                Console.WriteLine("Press any key to stop the simulation.");
+                if (Console.KeyAvailable)
+                {
+                    Console.ReadKey();
+                    running = false;
+                }
+            }
+
+            Console.WriteLine("Automatic simulation ended.");
         }
 
         public static void LoadFlightFromCSVfile(string filepath, string seperator) {
