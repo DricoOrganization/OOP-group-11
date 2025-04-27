@@ -15,8 +15,7 @@ public class Airport {
 
     private List<Aircraft> aircrafts;
 
-        public Airport(int runwayRows, int runwayCols)
-    {
+    public Airport(int runwayRows, int runwayCols) {
         runways = new Runway[runwayRows, runwayCols];
         
         for (int i = 0; i < runwayRows; i++)
@@ -26,22 +25,23 @@ public class Airport {
                 runways[i, j] = new Runway($"Runway {i + 1}-{j + 1}");
             }
         }
-
-        aircrafts = new List<Aircraft>();
     }
 
     /*
     This shows the current status of all runways and aircrafts
     */
     public void ShowStatus() {
+        int lastI;
         for (int i = 0; i < runways.GetLength(0); i++) {
         for (int j = 0; j < runways.GetLength(1); j++) {
+            Console.Write($"{runways[i, j].GetID()}: ");
             if (!runways[i, j].IsFree()) {
             Console.WriteLine("Occupied by:");
             Console.WriteLine(runways[i, j].GetID());
             Console.WriteLine(runways[i, j].GetTicksAvailability());
-            }
+            } else {
             Console.WriteLine("Free");
+            }
         }
         }
 
