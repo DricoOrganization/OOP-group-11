@@ -34,12 +34,12 @@ public class Airport {
     This shows the current status of all runways and aircrafts
     */
     public void ShowStatus() {
-        for (int j = 0; j < runways.Length; j++) {
-        for (int i = 0; i < runways.Length; i++) {
-            if (!runways[j, i].IsFree()) {
+        for (int i = 0; i < runways.GetLength(0); i++) {
+        for (int j = 0; j < runways.GetLength(1); j++) {
+            if (!runways[i, j].IsFree()) {
             Console.WriteLine("Occupied by:");
-            Console.WriteLine(runways[j, i].GetID());
-            Console.WriteLine(runways[j, i].GetTicksAvailability());
+            Console.WriteLine(runways[i, j].GetID());
+            Console.WriteLine(runways[i, j].GetTicksAvailability());
             }
             Console.WriteLine("Free");
         }

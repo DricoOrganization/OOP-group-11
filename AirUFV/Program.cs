@@ -15,8 +15,11 @@ internal class Program
         Runway runwayA = new Runway("A");
         Runway runwayB = new Runway("B");
         Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
-        Airport AirUFV = new Airport(2, 1);
+        Airport AirUFV = new Airport(3, 3);
 
+        AirUFV.ShowStatus();
+
+        //make the loop for better user experience
         int input = 0;
         while(input != 5) {
 
