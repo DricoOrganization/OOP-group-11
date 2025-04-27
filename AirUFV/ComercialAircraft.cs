@@ -15,6 +15,15 @@ namespace AirUFV
             this.numberOfPassengers = numberOfPassengers;
         }
 
+        public int GetNumberOfPassengers()
+        {
+            return this.numberOfPassengers;
+        }
+
+        public void SetNumberOfPassengers(int numberOfPassengers)
+        {
+            this.numberOfPassengers = numberOfPassengers;
+        }
         public override string ToString()
         {
             return base.ToString() + $" | Type: Commercial | Passengers: {this.numberOfPassengers}";

@@ -14,14 +14,13 @@ namespace AirUFV
 
     public abstract class Aircraft
     {
-        // Getters and setters for all aircraft
-        public string id { get; set; }
-        public AircraftStatus status { get; set; }
-        public int distance { get; set; } // Distance to airport in km
-        public int speed { get; set; } // Speed in km/h
-        public double fuelCapacity { get; set; } // Max fuel in liters
-        public double fuelConsumption { get; set; } // Liters consumed per km
-        public double currentFuel { get; set; } // Current fuel level
+        protected string id;
+        protected AircraftStatus status;
+        protected int distance;
+        protected int speed;
+        protected double fuelCapacity;
+        protected double fuelConsumption;
+        protected double currentFuel;
 
         protected Aircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
         {
@@ -31,6 +30,73 @@ namespace AirUFV
             this.speed = speed;
             this.fuelCapacity = fuelCapacity;
             this.fuelConsumption = fuelConsumption;
+            this.currentFuel = currentFuel;
+        }
+
+        public string GetId(){
+            return this.id;
+        }
+
+        public void SetId(string id){
+            this.id = id;
+        }
+        public AircraftStatus GetStatus()
+        {
+            return this.status;
+        }
+
+        public void SetStatus(AircraftStatus status)
+        {
+            this.status = status;
+        }
+
+        public int GetDistance()
+        {
+            return this.distance;
+        }
+
+        public void SetDistance(int distance)
+        {
+            this.distance = distance;
+        }
+
+        public int GetSpeed()
+        {
+            return this.speed;
+        }
+
+        public void SetSpeed(int speed)
+        {
+            this.speed = speed;
+        }
+
+        public double GetFuelCapacity()
+        {
+            return this.fuelCapacity;
+        }
+
+        public void SetFuelCapacity(double fuelCapacity)
+        {
+            this.fuelCapacity = fuelCapacity;
+        }
+
+        public double GetFuelConsumption()
+        {
+            return this.fuelConsumption;
+        }
+
+        public void SetFuelConsumption(double fuelConsumption)
+        {
+            this.fuelConsumption = fuelConsumption;
+        }
+
+        public double GetCurrentFuel()
+        {
+            return this.currentFuel;
+        }
+
+        public void SetCurrentFuel(double currentFuel)
+        {
             this.currentFuel = currentFuel;
         }
 

@@ -14,6 +14,16 @@ namespace AirUFV
             this.owner = owner;
         }
 
+        public string GetOwner()
+        {
+            return this.owner;
+        }
+
+        public void SetOwner(string owner)
+        {
+            this.owner = owner;
+        }
+
         public override string ToString()
         {
             return base.ToString() + $" | Type: Private | Owner: {this.owner}";
