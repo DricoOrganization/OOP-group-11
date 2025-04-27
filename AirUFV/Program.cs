@@ -15,8 +15,9 @@ internal class Program
         Runway runwayA = new Runway("A");
         Runway runwayB = new Runway("B");
         Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
-        Airport AirUFV = new Airport(runwayA, runwayB, aircraft);
+        Airport AirUFV = new Airport(2, 1);
 
+    
         //give the inital selections menu
         Console.WriteLine("----------   Air UFV  ------------");
         Console.WriteLine("1. Load flight from file.");
@@ -58,6 +59,7 @@ internal class Program
             Console.Clear();
             Console.WriteLine("----------   Air UFV  ------------");
             Console.WriteLine("Enter your information");
+            Console.WriteLine($"{parameters[i]}");
             Console.WriteLine("----------------------------------");
             results.Add(Console.ReadLine());
             }

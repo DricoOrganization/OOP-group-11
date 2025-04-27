@@ -15,11 +15,19 @@ public class Airport {
 
     private List<Aircraft> aircrafts;
 
-    public Airport(Runway runway1, Runway runway2, Aircraft aircraft ) {
-        this.runways[0, 0] = runway1;
-        this.runways[0, 1] = runway2;
+        public Airport(int runwayRows, int runwayCols)
+    {
+        runways = new Runway[runwayRows, runwayCols];
+        
+        for (int i = 0; i < runwayRows; i++)
+        {
+            for (int j = 0; j < runwayCols; j++)
+            {
+                runways[i, j] = new Runway($"Runway {i + 1}-{j + 1}");
+            }
+        }
 
-        this.aircrafts.Add(aircraft);
+        aircrafts = new List<Aircraft>();
     }
 
     /*
