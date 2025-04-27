@@ -1,4 +1,5 @@
 using System;
+using AirUFV;
 
 namespace AirUFV
 {
@@ -6,7 +7,7 @@ namespace AirUFV
     {
         private string parameters;
 
-        private int numberOfPassengers;
+        public int numberOfPassengers { get; set; }
 
         public CommercialAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numberOfPassengers)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
