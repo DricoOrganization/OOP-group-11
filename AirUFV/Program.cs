@@ -17,8 +17,11 @@ internal class Program
         Aircraft aircraft = new CommercialAircraft("1", AircraftStatus.OnGround, 0, 0, 10, 2, 10, 200);
         Airport AirUFV = new Airport(2, 1);
 
-    
+        int input = 0;
+        while(input != 5) {
+
         //give the inital selections menu
+        Console.Clear();
         Console.WriteLine("----------   Air UFV  ------------");
         Console.WriteLine("1. Load flight from file.");
         Console.WriteLine("2. Load a flight manually.");
@@ -28,7 +31,7 @@ internal class Program
         Console.WriteLine("----------------------------------");
 
         //transform the string that the user types to int in order to use it better
-        int input = Int32.Parse(Console.ReadLine());
+        input = Int32.Parse(Console.ReadLine());
 
         //a switch case statement that selects the function based on the user input
         switch (input) {
@@ -48,7 +51,7 @@ internal class Program
             case 5:
             throw new Exception("Program Terminated.");
         }
-
+        }
     }
 
         public static (string type, string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maximumLoad, int numberOfPassengers, string owner) LoadFlightManual() {
