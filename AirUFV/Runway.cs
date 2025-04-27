@@ -1,9 +1,10 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using AirUFV;
 
 namespace AirUFV;
-
+    
 public class Runway {
     private string ID;
     private enum RunwayStatus{
@@ -57,7 +58,7 @@ public class Runway {
             this.currentAircraft = aircraft;
             this.status = RunwayStatus.Occupied;
             this.ticksAvailability = 3;
-            aircraft.Status = AircraftStatus.Landing;
+            aircraft.status = AircraftStatus.Landing;
             return true;
         }
         return false;
@@ -77,7 +78,7 @@ public class Runway {
     public void ReleaseRunway(){
         if (this.currentAircraft != null)
         {
-            this.currentAircraft.Status = AircraftStatus.OnGround;
+            this.currentAircraft.status = AircraftStatus.OnGround;
             this.currentAircraft = null;
         }
         this.status = RunwayStatus.Free;
